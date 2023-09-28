@@ -1,0 +1,55 @@
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <!-- Button trigger modal -->
+        <button id="add-keluarga-modal-button" type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#add-keluarga-modal">
+            Add
+        </button>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Hubungan</th>
+                        <th>Nama</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <% if (keluarga.length > 0) { %>
+                        <% keluarga.forEach(function(kel,i) { %>
+                            <tr>
+                                <td>
+                                    <%= i +1 %>
+                                </td>
+                                <td>
+                                    <%= kel.hubungan %>
+                                </td>
+                                <td>
+                                    <%= kel.nama %>
+                                </td>
+                                <td class="text-center">
+                                    <form action="/mahasiswa/keluarga/<%= kel.id %>?_method=DELETE" method="POST">
+                                        <a href="javascript:void()" class="btn btn-outline-warning btn-sm button-update"
+                                            data-id="<%= kel.id %>" data-hubungan="<%= kel.hubungan %>"
+                                            data-nama="<%= kel.nama %>">Edit</a>
+                                        <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('Apa kamu yakin ingin menghapus aku dari ingatan kamu?');">
+                                            Delete
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    <% } else { %>
+                        <tr>
+                            <td colspan="4">No Data</td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
